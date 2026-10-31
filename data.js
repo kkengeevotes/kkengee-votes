@@ -77,3 +77,27 @@ function rowsToObjects(rows) {
 function isShown(row) {
   return String(row.show).toUpperCase() === "TRUE";
 }
+
+// 6. 93784000 ms → "1d 02h 03m 04s"
+function formatTimeLeft(ms) {
+  const total = Math.floor(ms / 1000);
+  const d = Math.floor(total / 86400);
+  const h = Math.floor((total % 86400) / 3600);
+  const m = Math.floor((total % 3600) / 60);
+
+  const s = total % 60;
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${d}d ${pad(h)}h ${pad(m)}m ${pad(s)}s`;
+}
+
+// 7. Safety: show Sheet text as plain text, never as code
+function escapeHtml(text) {
+  return String(text || "")
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+// 8. Safety: only allow real https:// links
+function safeLink(url) {
+  return /^https:\/\//i.test(url || "") ? escapeHtml(url) : "";
+}

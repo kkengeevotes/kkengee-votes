@@ -254,3 +254,109 @@ a:focus-visible {
   outline: 2px solid var(--silver);
   outline-offset: 3px;
 }
+
+/* ===== 10. GOALS PAGE ===== */
+.goal-list {
+  display: grid;
+  gap: 16px;
+}
+
+.goal-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  overflow: hidden;
+}
+
+.goal-img {
+  display: block;
+  width: calc(100% + 40px);   /* stretch past the card padding */
+  margin: -24px -20px 16px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.goal-platform {
+  color: var(--smoke);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 8px;
+}
+
+.goal-card h2 { font-size: 22px; }
+
+
+.goal-numbers {
+  margin: 12px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.goal-numbers strong {
+  font-family: var(--font-heading);
+  font-size: 26px;
+}
+
+.goal-numbers span { color: var(--smoke); }
+
+.goal-card .bar { height: 10px; border-radius: 5px; }
+
+.goal-meta-row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--silver);
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.goal-countdown {
+  color: var(--smoke);
+  font-size: 14px;
+  margin: 12px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* A finished goal gets a pearl outline and a full pearl bar */
+.goal-card.reached { border-color: var(--pearl); }
+.goal-card.reached .bar-fill { background: var(--pearl); }
+
+/* ===== 11. STREAM GUIDE ===== */
+.section-title { font-size: 20px; margin: 28px 0 12px; }
+.group-title { color: var(--smoke); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin: 16px 0 8px; }
+
+.tips {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.tips h2 { font-size: 18px; }
+.tips ul { margin: 12px 0 0; padding-left: 20px; color: var(--silver); }
+.tips li { margin-bottom: 6px; }
+
+.link-list { display: grid; gap: 8px; }
+
+.link-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.link-row:hover { border-color: var(--silver); }
+.link-row small { display: block; color: var(--smoke); font-size: 13px; }
+
+.link-tag {
+  flex-shrink: 0;
+
+  font-size: 12px;
+  color: var(--bg);
+  background: var(--silver);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
