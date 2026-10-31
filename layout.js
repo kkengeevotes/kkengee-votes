@@ -37,3 +37,6 @@ document.getElementById("site-footer").innerHTML = `
   <p>Questions or corrections? Reach us on X:
   <a href="https://x.com/kkengeevotes">@kkengeevotes</a></p>
 `;
+
+// On phones, slide the menu so the current page's tab is visible
+document.querySelector(".menu a.active")?.scrollIntoView({ inline: "center", block: "nearest" });

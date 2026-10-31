@@ -35,16 +35,12 @@ main {
 h1, h2 { font-family: var(--font-heading); margin: 0; }
 
 /* ===== 3. HEADER ===== */
+/* Phone first: logo on top, swipeable menu row underneath */
 .site-header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  padding: 16px;
-  border-bottom: 1px solid var(--line);
   max-width: 720px;
   margin: 0 auto;
+  padding: 16px 16px 0;
+  border-bottom: 1px solid var(--line);
 }
 
 .logo {
@@ -55,12 +51,25 @@ h1, h2 { font-family: var(--font-heading); margin: 0; }
   letter-spacing: 1px;
 }
 
-.menu { display: flex; flex-wrap: wrap; gap: 16px; }
+.menu {
+  display: flex;
+  gap: 4px;
+  margin: 8px -16px 0;          /* row reaches the screen edges */
+  padding: 0 12px;
+  overflow-x: auto;             /* swipe sideways if it doesn't fit */
+  scrollbar-width: none;        /* hide the scrollbar (Firefox) */
+}
+.menu::-webkit-scrollbar { display: none; } /* hide it (Chrome, Safari) */
 
 .menu a {
+  flex-shrink: 0;               /* never squash a link */
+  white-space: nowrap;          /* "Stream guide" stays on one line */
   color: var(--smoke);
   text-decoration: none;
+
   font-size: 14px;
+  padding: 10px 8px 12px;       /* big enough to tap with a thumb */
+  border-bottom: 2px solid transparent;
 }
 
 .menu a:hover { color: var(--pearl); }
@@ -68,6 +77,18 @@ h1, h2 { font-family: var(--font-heading); margin: 0; }
 .menu a.active {
   color: var(--pearl);
   font-weight: 600;
+  border-bottom-color: var(--pearl); /* underline like app tabs */
+}
+
+/* Wider screens: logo and menu side by side */
+@media (min-width: 640px) {
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+  }
+  .menu { margin: 0; padding: 0; }
 }
 
 /* ===== 4. BANNER ===== */
