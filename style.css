@@ -1,0 +1,155 @@
+/* ===== 1. YOUR DESIGN DECISIONS (Session 3) ===== */
+:root {
+  --bg: #0A0A0D;        /* black background */
+  --surface: #16161B;   /* slightly lighter black for cards */
+  --line: #2A2A30;      /* thin borders, empty bar */
+  --pearl: #EDEDF0;     /* buttons, headings */
+  --silver: #C4C4CC;    /* bars, highlights */
+  --smoke: #9E9EA8;     /* small supporting text */
+  --urgent: #E5484D;    /* ENDING TODAY badge only */
+
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --radius: 12px;
+}
+
+/* ===== 2. BASICS ===== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--pearl);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+a { color: var(--pearl); }
+
+main {
+  max-width: 720px;   /* keeps it readable on big screens */
+  margin: 0 auto;
+  padding: 16px;
+}
+
+h1, h2 { font-family: var(--font-heading); margin: 0; }
+
+/* ===== 3. HEADER ===== */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 20px;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.menu { display: flex; flex-wrap: wrap; gap: 16px; }
+
+.menu a {
+  color: var(--smoke);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.menu a:hover { color: var(--pearl); }
+
+/* ===== 4. BANNER ===== */
+.banner {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px 20px;
+  text-align: center;
+}
+
+.banner-label {
+  color: var(--smoke);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+  margin: 0 0 8px;
+}
+
+.banner h1 { font-size: 32px; text-transform: uppercase; }
+.banner-sub { color: var(--silver); margin: 4px 0 20px; }
+
+.btn {
+  display: inline-block;
+  background: var(--pearl);
+  color: var(--bg);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+}
+
+.btn:hover { background: var(--silver); }
+
+.countdown { color: var(--smoke); font-size: 14px; margin: 12px 0 0; }
+
+/* ===== 5. QUICK LINKS (2 x 2 grid) ===== */
+.quick-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.card:hover { border-color: var(--silver); }
+
+/* ===== 6. GOAL CARD ===== */
+.goal {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.goal h2 { font-size: 18px; margin-bottom: 12px; }
+
+.bar {
+  height: 8px;
+  background: var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bar-fill { height: 100%; background: var(--silver); }
+
+.goal-meta { color: var(--smoke); font-size: 14px; margin: 8px 0 0; }
+
+/* ===== 7. FOOTER ===== */
+.site-footer {
+  max-width: 720px;
+  margin: 32px auto 0;
+  padding: 24px 16px;
+  border-top: 1px solid var(--line);
+  color: var(--smoke);
+  font-size: 13px;
+  text-align: center;
+}
+
+.site-footer a { color: var(--silver); }
