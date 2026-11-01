@@ -381,3 +381,115 @@ a:focus-visible {
   border-radius: 999px;
   padding: 3px 10px;
 }
+
+/* ===== 12. YOUTUBE PAGE ===== */
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;              /* swipe if it doesn't fit */
+  scrollbar-width: none;
+  margin-bottom: 16px;
+}
+.filter-tabs::-webkit-scrollbar { display: none; }
+
+.filter-tab {
+  flex-shrink: 0;
+  font: inherit;                 /* buttons don't use the page font by default */
+  font-size: 14px;
+  color: var(--smoke);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;          /* pill shape */
+  padding: 8px 16px;
+  cursor: pointer;
+}
+.filter-tab:hover { color: var(--pearl); border-color: var(--silver); }
+
+.filter-tab.active {
+  color: var(--bg);
+  background: var(--pearl);
+  border-color: var(--pearl);
+  font-weight: 600;
+}
+
+.filter-tab:focus-visible {
+  outline: 2px solid var(--silver);
+
+  outline-offset: 3px;
+}
+
+.video-list { display: grid; gap: 12px; }
+
+.video-card {
+  display: grid;
+  grid-template-columns: 128px 1fr;  /* thumbnail | info */
+  gap: 14px;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px;
+  text-decoration: none;
+}
+.video-card:hover { border-color: var(--silver); }
+
+.video-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;             /* trims YouTube's black bars */
+  border-radius: 8px;
+  background: var(--line);       /* grey box while the image loads */
+}
+
+.video-info { min-width: 0; }    /* lets long titles shrink instead of overflowing */
+
+.video-type {
+  color: var(--smoke);
+  font-size: 11px;
+  text-transform: uppercase;
+
+  letter-spacing: 2px;
+}
+
+.video-info h2 {
+  font-size: 15px;
+  line-height: 1.3;
+  margin: 2px 0 6px;
+  overflow: hidden;
+  display: -webkit-box;          /* cut long titles after 2 lines with … */
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.video-views {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--smoke);
+  font-size: 13px;
+}
+.video-views strong {
+  color: var(--pearl);
+  font-family: var(--font-heading);
+  font-size: 17px;
+}
+
+.video-gain {
+  margin: 2px 0 0;
+  color: var(--silver);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+
+.last-updated {
+  color: var(--smoke);
+  font-size: 13px;
+  text-align: center;
+  margin-top: 16px;
+}
+
+/* Bigger thumbnails on wider screens */
+@media (min-width: 640px) {
+  .video-card { grid-template-columns: 200px 1fr; }
+  .video-info h2 { font-size: 17px; }
+}

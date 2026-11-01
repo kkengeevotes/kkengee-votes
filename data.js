@@ -9,6 +9,7 @@ const SHEET_BASE =
 const TABS = {
   songs: "729116566",
   videos: "1298032632",
+  videoHistory: "439322131",
   goals: "312223254",
   voting: "1950828819",
   playlists: "514115908",
@@ -100,4 +101,11 @@ function escapeHtml(text) {
 // 8. Safety: only allow real https:// links
 function safeLink(url) {
   return /^https:\/\//i.test(url || "") ? escapeHtml(url) : "";
+}
+
+// 2. "40,000,000" (text from the Sheet) → 40000000 (a real number)
+function toNumber(text) {
+  const digits = String(text || "").replace(/[^0-9]/g, "");
+
+  return digits ? Number(digits) : 0;
 }

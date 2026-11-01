@@ -27,13 +27,6 @@ async function loadGoals() {
   }
 }
 
-// 2. "40,000,000" (text from the Sheet) → 40000000 (a real number)
-function toNumber(text) {
-  const digits = String(text || "").replace(/[^0-9]/g, "");
-
-  return digits ? Number(digits) : 0;
-}
-
 // 3. A deadline means the end of that day, Korea time
 function deadlineTime(dateText) {
   if (!dateText) return null;

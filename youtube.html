@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YouTube · YEJI Charts</title>
-  <meta name="description" content="Views for YEJI’s MVs, performances and covers.">
+  <meta name="description" content="Views for YEJI's MVs, performances and covers, updated daily.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,15 +17,26 @@
 
   <main>
     <h1 class="page-title">YouTube</h1>
-    <p class="page-intro">Views for YEJI’s MVs, performances and covers.</p>
+    <p class="page-intro">Views for YEJI's MVs, performances and covers, updated daily.</p>
 
-    <section class="placeholder">
-      View counts are coming in Session 15.
+    <div class="filter-tabs" role="group" aria-label="Filter videos">
+      <button type="button" class="filter-tab active" data-type="All">All</button>
+      <button type="button" class="filter-tab" data-type="MV">MV</button>
+      <button type="button" class="filter-tab" data-type="Performance">Performance</button>
+      <button type="button" class="filter-tab" data-type="Cover">Cover</button>
+    </div>
+
+    <section id="video-list" class="video-list">
+      <p class="placeholder">Loading videos…</p>
     </section>
+
+    <p id="last-updated" class="last-updated"></p>
   </main>
 
   <footer class="site-footer" id="site-footer"></footer>
 
   <script src="layout.js"></script>
+  <script src="data.js"></script>
+  <script src="youtube.js"></script>
 </body>
 </html>
