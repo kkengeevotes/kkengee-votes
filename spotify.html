@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Spotify · YEJI Charts</title>
-  <meta name="description" content="Total and daily streams for every YEJI song.">
+  <meta name="description" content="Total and daily Spotify streams for every YEJI song.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,15 +17,22 @@
 
   <main>
     <h1 class="page-title">Spotify</h1>
-    <p class="page-intro">Total and daily streams for every YEJI song.</p>
+    <p class="page-intro">Total and daily Spotify streams for every YEJI song.</p>
 
-    <section class="placeholder">
-      Stream counts are coming in Session 16.
+    <section id="spotify-chart" class="chart-card" hidden></section>
+
+    <section id="song-stats">
+      <p class="placeholder">Loading streams…</p>
     </section>
+
+    <p class="last-updated">Spotify totals are entered daily by the team. Source: Spotify, kworb.net.</p>
   </main>
 
   <footer class="site-footer" id="site-footer"></footer>
 
+
   <script src="layout.js"></script>
+  <script src="data.js"></script>
+  <script src="spotify.js"></script>
 </body>
 </html>

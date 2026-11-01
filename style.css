@@ -493,3 +493,90 @@ a:focus-visible {
   .video-card { grid-template-columns: 200px 1fr; }
   .video-info h2 { font-size: 17px; }
 }
+
+/* ===== 13. SPOTIFY PAGE ===== */
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 8px;
+}
+
+.chart-label {
+  color: var(--smoke);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.chart-latest {
+  margin: 4px 0 16px;
+  color: var(--smoke);
+  font-variant-numeric: tabular-nums;
+}
+.chart-latest strong {
+  color: var(--pearl);
+  font-family: var(--font-heading);
+  font-size: 26px;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;      /* bars grow up from the bottom */
+  gap: 4px;
+  height: 140px;
+  border-bottom: 1px solid var(--line);
+}
+
+.chart-bar {
+  flex: 1;                    /* every bar gets an equal share of the width */
+  max-width: 40px;
+  background: var(--silver);
+  opacity: 0.55;
+  border-radius: 3px 3px 0 0;
+}
+.chart-bar.latest {
+  background: var(--pearl);
+  opacity: 1;                 /* the newest day stands out */
+}
+
+.chart-axis {
+  display: flex;
+  justify-content: space-between;
+  color: var(--smoke);
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.stat-list { display: grid; gap: 8px; }
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  text-decoration: none;
+}
+a.stat-row:hover { border-color: var(--silver); }
+
+.stat-row small {
+  display: block;
+  color: var(--smoke);
+  font-size: 12px;
+}
+
+.stat-numbers {
+  text-align: right;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.stat-numbers strong {
+  font-family: var(--font-heading);
+  font-size: 17px;
+}
