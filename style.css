@@ -92,25 +92,6 @@ h1, h2 { font-family: var(--font-heading); margin: 0; }
 }
 
 /* ===== 4. BANNER ===== */
-.banner {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 32px 20px;
-  text-align: center;
-}
-
-.banner-label {
-  color: var(--smoke);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 12px;
-  margin: 0 0 8px;
-}
-
-.banner h1 { font-size: 32px; text-transform: uppercase; }
-.banner-sub { color: var(--silver); margin: 4px 0 20px; }
-
 .btn {
   display: inline-block;
   background: var(--pearl);
@@ -579,4 +560,138 @@ a.stat-row:hover { border-color: var(--silver); }
 .stat-numbers strong {
   font-family: var(--font-heading);
   font-size: 17px;
+}
+
+/* ===== 14. HOME CAROUSEL ===== */
+.carousel { margin-bottom: 16px; }
+
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;   /* swipes always land on a whole slide */
+  scrollbar-width: none;
+  border-radius: var(--radius);
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+
+.slide {
+  flex: 0 0 100%;                  /* each slide is exactly one screen wide */
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 300px;               /* all slides the same height */
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px 20px;
+  text-align: center;
+}
+
+.slide-label {
+  color: var(--smoke);
+  font-size: 12px;
+  text-transform: uppercase;
+
+  letter-spacing: 2px;
+  margin: 0 0 4px;
+}
+.slide-label .badge { margin-left: 6px; vertical-align: middle; }
+
+.slide h2 {
+  font-size: 30px;
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+
+.slide-sub {
+  color: var(--silver);
+  margin: 4px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.slide .bar {
+  width: 100%;
+  max-width: 320px;
+  height: 10px;
+  margin: 8px 0;
+}
+
+.slide .btn { margin-top: 16px; }
+
+.slide-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+
+.btn-secondary {
+  background: transparent;
+  color: var(--pearl);
+  border: 1px solid var(--pearl);
+}
+.btn-secondary:hover { background: var(--surface); color: var(--pearl); }
+
+.slide-countdown {
+  color: var(--smoke);
+  font-size: 14px;
+  margin: 12px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Dots: the button is a big tap area, the visible dot is drawn inside it */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 8px;
+}
+.dot {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.dot::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--line);
+  transition: width 0.2s;
+}
+.dot.active::before { width: 20px; background: var(--pearl); }
+.dot:focus-visible { outline: 2px solid var(--silver); outline-offset: 2px; border-radius: 6px; }
+
+/* Comeback countdown card */
+.comeback {
+  background: var(--surface);
+  border: 1px solid var(--pearl);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.comeback h2 { font-size: 22px; text-transform: uppercase; }
+.comeback-timer {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 30px;
+  margin: 8px 0 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Respect the "reduce motion" phone setting */
+@media (prefers-reduced-motion: reduce) {
+  .dot::before { transition: none; }
+
 }

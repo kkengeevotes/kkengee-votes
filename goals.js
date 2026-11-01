@@ -27,13 +27,6 @@ async function loadGoals() {
   }
 }
 
-// 3. A deadline means the end of that day, Korea time
-function deadlineTime(dateText) {
-  if (!dateText) return null;
-  const date = new Date(`${dateText}T23:59:59+09:00`);
-  return isNaN(date) ? null : date;
-}
-
 // 4. Draw all cards
 function render() {
   if (goals.length === 0) {

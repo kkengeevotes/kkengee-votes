@@ -109,3 +109,18 @@ function toNumber(text) {
 
   return digits ? Number(digits) : 0;
 }
+
+// 2. Turn "2026-11-04" + "23:59" (Korea time) into a real moment in time
+function endTime(row) {
+  if (!row.end_date) return null;
+  const time = row.end_time_kst || "23:59";
+  const date = new Date(`${row.end_date}T${time}:00+09:00`);
+  return isNaN(date) ? null : date;
+}
+
+// 3. A deadline means the end of that day, Korea time
+function deadlineTime(dateText) {
+  if (!dateText) return null;
+  const date = new Date(`${dateText}T23:59:59+09:00`);
+  return isNaN(date) ? null : date;
+}

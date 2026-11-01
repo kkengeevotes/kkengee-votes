@@ -1,57 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic setup: text encoding and phone-friendly sizing -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YEJI Charts</title>
   <meta name="description" content="Stream, vote, and push goals for YEJI, all in one place.">
 
-  <!-- Fonts: Montserrat for headings, Inter for text and numbers -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-
-  <!-- Our own styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- HEADER: logo + menu -->
-    <header class="site-header" id="site-header"></header>
+  <header class="site-header" id="site-header"></header>
 
   <main>
-
-    <!-- BANNER: one slide for now; becomes a carousel later -->
-    <section class="banner">
-      <p class="banner-label">Vote now</p>
-      <h1>AAA 2026</h1>
-      <p class="banner-sub">Popularity Award: Solo (Female)</p>
-      <a href="voting.html" class="btn">Vote for YEJI</a>
-      <p class="countdown">Ends Nov 4, 23:59 KST</p>
+    <!-- CAROUSEL: slides are built by home.js from the Sheet -->
+    <section class="carousel" aria-roledescription="carousel" aria-label="Highlights">
+      <div class="carousel-track" id="carousel-track">
+        <div class="slide"><p class="slide-label">Loading…</p></div>
+      </div>
+      <div class="carousel-dots" id="carousel-dots"></div>
     </section>
 
-    <!-- QUICK LINKS: 2 x 2 grid -->
+    <!-- COMEBACK COUNTDOWN: only shown when set in the Settings tab -->
+    <section id="comeback" class="comeback" hidden></section>
+
+    <!-- QUICK LINKS -->
     <section class="quick-links">
       <a href="voting.html" class="card">Voting</a>
+
       <a href="goals.html" class="card">Goals</a>
       <a href="spotify.html" class="card">Spotify</a>
       <a href="youtube.html" class="card">YouTube</a>
     </section>
-
-    <!-- GOAL CARD: sample numbers for now -->
-    <section class="goal">
-      <h2>Air MV views goal</h2>
-      <div class="bar"><div class="bar-fill" style="width: 65%"></div></div>
-      <p class="goal-meta">65% · sample goal</p>
-    </section>
   </main>
 
-  <!-- FOOTER -->
   <footer class="site-footer" id="site-footer"></footer>
 
   <script src="layout.js"></script>
-
+  <script src="data.js"></script>
+  <script src="home.js"></script>
 </body>
-
 </html>

@@ -21,14 +21,6 @@ async function loadVotes() {
   }
 }
 
-// 2. Turn "2026-11-04" + "23:59" (Korea time) into a real moment in time
-function endTime(row) {
-  if (!row.end_date) return null;
-  const time = row.end_time_kst || "23:59";
-  const date = new Date(`${row.end_date}T${time}:00+09:00`);
-  return isNaN(date) ? null : date;
-}
-
 // 3. Draw all cards
 
 function render() {
