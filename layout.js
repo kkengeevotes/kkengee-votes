@@ -24,7 +24,7 @@ const menuHtml = menuItems
 
 // 4. Put the header into the page
 document.getElementById("site-header").innerHTML = `
-  <a href="index.html" class="logo">YEJI Charts</a>
+  <a href="index.html" class="logo">KKENGEE Votes for YEJI</a>
   <nav class="menu">${menuHtml}</nav>
 `;
 
