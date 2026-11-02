@@ -732,3 +732,17 @@ a.stat-row:hover { border-color: var(--silver); }
 }
 
 .slide-credit {
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  margin: 0;
+  font-size: 11px;
+  color: var(--smoke);
+}
+
+.goal-credit {
+  margin: -8px 0 12px;
+  font-size: 11px;
+  color: var(--smoke);
+  text-align: right;
+}
