@@ -124,3 +124,11 @@ function deadlineTime(dateText) {
   const date = new Date(`${dateText}T23:59:59+09:00`);
   return isNaN(date) ? null : date;
 }
+
+// Safety for images: allow https:// links, or files in our own images/ folder
+function safeImage(path) {
+  const p = String(path || "").trim();
+  if (/^https:\/\//i.test(p)) return escapeHtml(p);
+  if (/^images\/[a-z0-9._-]+$/i.test(p)) return "/" + p;
+  return "";
+}

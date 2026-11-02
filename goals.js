@@ -43,12 +43,12 @@ function cardHtml(goal, index) {
   const percent = Math.min(100, (goal.currentNum / goal.targetNum) * 100);
   const reached = goal.currentNum >= goal.targetNum;
   const toGo = Math.max(0, goal.targetNum - goal.currentNum);
-  const image = safeLink(goal.image_url);
+  const image = safeImage(goal.image_url);
   const fmt = (n) => n.toLocaleString("en-US");
 
   return `
     <article class="goal-card ${reached ? "reached" : ""}">
-      ${image ? `<img class="goal-img" src="${image}" alt="" loading="lazy">` : ""}
+      ${image && goal.image_credit ? `<p class="goal-credit">📷 ${escapeHtml(goal.image_credit)}</p>` : ""}
 
       <p class="goal-platform">${escapeHtml(goal.platform)}</p>
       <h2>${escapeHtml(goal.title)}</h2>

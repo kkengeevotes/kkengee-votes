@@ -37,6 +37,17 @@ async function loadHome() {
   }
 }
 
+
+// Background photo + dark shade + credit, or nothing if no image is set
+function slideBackground(url, credit) {
+  const src = safeImage(url);
+  if (!src) return "";
+  return `
+    <img class="slide-bg" src="${src}" alt="" decoding="async">
+    <div class="slide-shade"></div>
+    ${credit ? `<p class="slide-credit">📷 ${escapeHtml(credit)}</p>` : ""}`;
+}
+
 // 2. Vote slides: open votes, soonest-ending first
 function voteSlides(rows) {
   const now = Date.now();
@@ -52,6 +63,7 @@ function voteSlides(rows) {
         : `<a class="btn" href="voting.html">See how to vote</a>`;
       return `
         <div class="slide">
+          ${slideBackground(v.image_url, v.image_credit)}
           <p class="slide-label">Vote now
             <span class="badge" data-badge-end="${v.end.getTime()}" hidden>ENDING TODAY</span>
           </p>
@@ -83,6 +95,7 @@ function goalSlides(rows) {
       const percent = Math.min(100, (g.currentNum / g.targetNum) * 100);
       return `
         <div class="slide">
+          ${slideBackground(g.image_url, g.image_credit)}
           <p class="slide-label">Goal · ${escapeHtml(g.platform)}</p>
           <h2>${escapeHtml(g.title)}</h2>
           <p class="slide-sub">${fmt(g.currentNum)} / ${fmt(g.targetNum)}</p>
@@ -109,6 +122,7 @@ function releaseSlides(settings, songs, videos) {
   );
   return [`
     <div class="slide">
+      ${slideBackground(settings.era_image_url, settings.era_image_credit)}
       <p class="slide-label">Latest release</p>
       <h2>${escapeHtml(title)}</h2>
       <p class="slide-sub">${escapeHtml(song.album)}</p>
@@ -124,7 +138,7 @@ function renderCarousel(slides) {
   if (slides.length === 0) {
     track.innerHTML = `
       <div class="slide">
-        <h2>YEJI Charts</h2>
+        <h2>KKENGEE Votes for YEJI</h2>
         <p class="slide-sub">Stream, vote, and push goals for YEJI.</p>
       </div>`;
     return;

@@ -701,3 +701,34 @@ a.stat-row:hover { border-color: var(--silver); }
   font-style: italic;
   margin-top: 2px;
 }
+
+/* ===== 15. SLIDE PHOTOS ===== */
+.slide {
+  position: relative;
+  overflow: hidden;      /* photo never spills outside the rounded corners */
+  isolation: isolate;    /* keeps the photo behind the text, inside this slide */
+}
+
+.slide-bg {
+  position: absolute;
+  inset: 0;              /* stretch to all four edges */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* fill the slide, cropping instead of squashing */
+  object-position: center 30%; /* favor the upper part, where faces usually are */
+  z-index: -2;
+}
+
+.slide-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 13, 0.55) 0%,
+    rgba(10, 10, 13, 0.75) 50%,
+    rgba(10, 10, 13, 0.92) 100%
+  );
+}
+
+.slide-credit {
