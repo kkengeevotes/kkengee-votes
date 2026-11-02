@@ -13,14 +13,30 @@ async function loadSpotify() {
       loadTab("settings"),
     ]);
 
-    // Settings tab → { site_name: "YEJI Charts", era_song_id: "pocket", ... }
+    // Settings tab → { site_name: "KKENGEE Votes for YEJI", era_song_id: "pocket", ... }
     const settings = {};
     settingsRows.forEach((row) => (settings[row.key] = row.value));
 
     const historyBySong = groupHistory(history);
+        // Titles by song_id, for the "combined" notes
+    const titles = {};
+    songs.forEach((s) => (titles[s.song_id] = s.title));
+
     const shown = songs
       .filter(isShown)
-      .map((song) => ({ ...song, ...summarize(historyBySong[song.song_id] || []) }));
+      .map((song) => {
+        // A combined song borrows its partner's numbers
+        const source = song.combined_with || song.song_id;
+        const partners = songs
+          .filter((s) => isShown(s) && s.combined_with === song.song_id)
+          .map((s) => s.title);
+        return {
+          ...song,
+          ...summarize(historyBySong[source] || []),
+          combinedWith: song.combined_with ? titles[song.combined_with] || song.combined_with : "",
+          includes: partners,
+        };
+      });
 
     renderSongs(shown);
     renderChart(shown, historyBySong, settings.era_song_id);
@@ -103,6 +119,10 @@ function songRow(song) {
       <span>
         <strong>${escapeHtml(song.title)}</strong>
         <small>${escapeHtml(song.album)}</small>
+        ${song.combinedWith
+          ? `<small class="stat-note">Spotify count combined with ${escapeHtml(song.combinedWith)}</small>` : ""}
+        ${song.includes.length
+          ? `<small class="stat-note">Includes ${song.includes.map(escapeHtml).join(", ")}</small>` : ""}
       </span>
       <span class="stat-numbers">
         <strong>${song.total ? fmt(song.total) : "–"}</strong>

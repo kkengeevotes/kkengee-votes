@@ -695,3 +695,9 @@ a.stat-row:hover { border-color: var(--silver); }
   .dot::before { transition: none; }
 
 }
+
+.stat-row .stat-note {
+  color: var(--silver);
+  font-style: italic;
+  margin-top: 2px;
+}
