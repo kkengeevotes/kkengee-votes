@@ -7,10 +7,13 @@ let activeType = "All";
 // 1. Load both tabs at once, then prepare each video
 async function loadVideos() {
   try {
-    const [rows, history] = await Promise.all([
+    const [rows, history, settingsRows] = await Promise.all([
       loadTab("videos"),
       loadTab("videoHistory"),
+      loadTab("settings"),
     ]);
+    const settings = {};
+    settingsRows.forEach((row) => (settings[row.key] = row.value));
     const gains = dailyGains(history);
 
     videos = rows
@@ -25,6 +28,7 @@ async function loadVideos() {
 
     render();
     showLastUpdated(rows);
+    renderVideoChart(rows, history, settings.chart_video_id || "air-mv");
   } catch (error) {
     console.error(error);
     videoList.innerHTML =
@@ -100,6 +104,23 @@ function showLastUpdated(rows) {
   const latest = times[times.length - 1];
   document.getElementById("last-updated").textContent =
     latest ? `Views last updated ${latest}` : "";
+}
+
+// 5b. Bar chart of daily views for the chosen video
+function renderVideoChart(rows, history, videoId) {
+  const days = history
+    .filter((r) => r.video_id === videoId)
+    .map((r) => ({ date: r.date, total: toNumber(r.views) }))
+    .filter((d) => d.date && d.total)
+    .sort((a, b) => a.date.localeCompare(b.date));
+  const points = dailyPoints(days);
+  if (points.length === 0) return; // needs 2 days in a row first
+
+  const video = rows.find((v) => v.video_id === videoId);
+  const title = video ? `${video.title}${video.type === "MV" ? " MV" : ""}` : videoId;
+  const box = document.getElementById("youtube-chart");
+  box.innerHTML = chartHtml(title, "daily views", points);
+  box.hidden = false;
 }
 
 // 6. Filter tabs: remember the choice and redraw

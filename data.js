@@ -132,3 +132,56 @@ function safeImage(path) {
   if (/^images\/[a-z0-9._-]+$/i.test(p)) return "/" + p;
   return "";
 }
+
+// ===== Chart helpers (shared by the Spotify and YouTube pages) =====
+
+// Days between two "YYYY-MM-DD" dates
+function daysBetween(a, b) {
+  return Math.round((Date.parse(b) - Date.parse(a)) / 86400000);
+}
+
+// "2026-11-02" → "Nov 2"
+function shortDate(dateText) {
+  return new Date(`${dateText}T00:00:00Z`).toLocaleDateString("en-US", {
+    month: "short", day: "numeric", timeZone: "UTC",
+  });
+}
+
+// [{date, total}, ...] oldest → newest  →  daily gains between entries
+// exactly 1 day apart, last 14 days
+function dailyPoints(days) {
+  const points = [];
+  for (let i = 1; i < days.length; i++) {
+    if (daysBetween(days[i - 1].date, days[i].date) === 1) {
+      points.push({ date: days[i].date, gain: days[i].total - days[i - 1].total });
+    }
+  }
+  return points.slice(-14);
+}
+
+// The bar chart's HTML, e.g. chartHtml("Air", "daily streams", points)
+function chartHtml(title, unit, points) {
+  const fmt = (n) => n.toLocaleString("en-US");
+  const max = Math.max(...points.map((p) => p.gain), 1);
+  const latest = points[points.length - 1];
+  const bars = points
+    .map((p, i) => {
+      const height = Math.max(2, (Math.max(0, p.gain) / max) * 100);
+      const isLatest = i === points.length - 1 ? " latest" : "";
+      return `<div class="chart-bar${isLatest}" style="height:${height}%"
+                   title="${shortDate(p.date)}: +${fmt(p.gain)}"></div>`;
+    })
+    .join("");
+
+  return `
+    <p class="chart-label">${escapeHtml(title)} · ${unit}</p>
+    <p class="chart-latest"><strong>+${fmt(latest.gain)}</strong> on ${shortDate(latest.date)}</p>
+    <div class="chart-bars" role="img"
+         aria-label="${escapeHtml(title)} ${unit}, latest +${fmt(latest.gain)} on ${shortDate(latest.date)}">
+      ${bars}
+    </div>
+    <div class="chart-axis">
+      <span>${shortDate(points[0].date)}</span>
+      <span>${shortDate(latest.date)}</span>
+    </div>`;
+}
