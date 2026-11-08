@@ -3,10 +3,14 @@
 async function loadStreamGuide() {
   try {
     // Load both tabs at the same time, not one after the other
-    const [playlists, songs] = await Promise.all([
+        const [playlists, songs, settingsRows] = await Promise.all([
       loadTab("playlists"),
       loadTab("songs"),
+      loadTab("settings"),
     ]);
+    const settings = {};
+    settingsRows.forEach((row) => (settings[row.key] = row.value));
+    renderStationhead(settings);
     renderPlaylists(playlists.filter(isShown));
     renderSongs(songs.filter(isShown));
   } catch (error) {

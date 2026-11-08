@@ -28,6 +28,7 @@ async function loadHome() {
     ];
     renderCarousel(slides);
     renderComeback(settings);
+    renderStationhead(settings);
     tick();
   } catch (error) {
 

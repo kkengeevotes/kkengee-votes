@@ -746,3 +746,47 @@ a.stat-row:hover { border-color: var(--silver); }
   color: var(--smoke);
   text-align: right;
 }
+
+/* ===== 16. STATIONHEAD BUTTON ===== */
+.stationhead-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--pearl);
+  border-radius: var(--radius);
+  text-decoration: none;
+}
+.stationhead-btn:hover { background: var(--line); }
+
+.stationhead-btn strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 16px;
+}
+.stationhead-btn small {
+  display: block;
+  color: var(--smoke);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.stationhead-arrow {
+  font-size: 22px;
+  color: var(--pearl);
+  flex-shrink: 0;
+}
+
+/* "hidden" must win over display: flex above */
+.stationhead-btn[hidden] { display: none; }
+
+.stationhead-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;   /* never stretch the logo */
+  flex-shrink: 0;
+}
+.stationhead-btn > span:first-of-type { flex: 1; } /* text takes the middle space */

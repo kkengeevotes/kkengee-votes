@@ -185,3 +185,13 @@ function chartHtml(title, unit, points) {
       <span>${shortDate(latest.date)}</span>
     </div>`;
 }
+
+// Stationhead button: shows the element with id="stationhead-btn"
+// if Settings has a valid stationhead_url
+function renderStationhead(settings) {
+  const btn = document.getElementById("stationhead-btn");
+  const url = String(settings.stationhead_url || "").trim();
+  if (!btn || !/^https:\/\//i.test(url)) return;
+  btn.href = url;
+  btn.hidden = false;
+}
