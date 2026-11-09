@@ -790,3 +790,33 @@ a.stat-row:hover { border-color: var(--silver); }
   flex-shrink: 0;
 }
 .stationhead-btn > span:first-of-type { flex: 1; } /* text takes the middle space */
+
+/* ===== 17. LOADING ANIMATION ===== */
+/* Dots that grow: "" → "." → ".." → "..." */
+.loading::after {
+  content: "...";
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+  vertical-align: bottom;
+  font-family: monospace;        /* every dot is exactly 1ch wide */
+  animation: loading-dots 1.2s steps(4, jump-none) infinite;
+}
+@keyframes loading-dots {
+  to { width: 3ch; }             /* 0 → 1 → 2 → 3 dots */
+}
+
+/* The dashed box gently glows while waiting */
+.placeholder.loading {
+  animation: loading-pulse 1.6s ease-in-out infinite;
+}
+@keyframes loading-pulse {
+  0%, 100% { border-color: var(--line); color: var(--smoke); }
+  50%      { border-color: var(--silver); color: var(--silver); }
+}
+
+/* People who turn off animations get still dots instead */
+@media (prefers-reduced-motion: reduce) {
+  .loading::after { animation: none; width: auto; }
+  .placeholder.loading { animation: none; }
+}

@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -36,15 +36,16 @@
     <!-- CAROUSEL: slides are built by home.js from the Sheet -->
     <section class="carousel" aria-roledescription="carousel" aria-label="Highlights">
       <div class="carousel-track" id="carousel-track">
-        <div class="slide"><p class="slide-label">Loading…</p></div>
+        <div class="slide"><p class="slide-label loading">Loading</p></div>
       </div>
       <div class="carousel-dots" id="carousel-dots"></div>
     </section>
 
     <!-- STATIONHEAD: shown when stationhead_url is set in Settings -->
     <a id="stationhead-btn" class="stationhead-btn" target="_blank" rel="noopener" hidden>
+      <img class="stationhead-logo" src="/images/stationhead-logo.png" alt="" width="32" height="32">
       <span>
-        <strong>🎧 Stream with us on Stationhead</strong>
+        <strong>Stream with us on Stationhead</strong>
         <small>Join our BLACKHEART channel and stream YEJI together</small>
       </span>
       <span class="stationhead-arrow" aria-hidden="true">→</span>
@@ -65,8 +66,8 @@
 
   <footer class="site-footer" id="site-footer"></footer>
 
-  <script src="layout.js?v=4"></script>
-  <script src="data.js?v=4"></script>
-  <script src="home.js?v=4"></script>
+  <script src="layout.js?v=5"></script>
+  <script src="data.js?v=5"></script>
+  <script src="home.js?v=5"></script>
 </body>
 </html> 
