@@ -512,23 +512,38 @@ a:focus-visible {
 }
 
 .chart-bar {
-  flex: 1;                    /* every bar gets an equal share of the width */
+  flex: 1;
   max-width: 40px;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
   background: var(--silver);
-  opacity: 0.55;
+  opacity: 0.45;
   border-radius: 3px 3px 0 0;
+  transition: opacity 0.15s;
 }
-.chart-bar.latest {
-  background: var(--pearl);
-  opacity: 1;                 /* the newest day stands out */
+.chart-bar:hover { opacity: 0.7; }
+.chart-bar.selected { background: var(--pearl); opacity: 1; }
+.chart-bar:focus-visible { outline: 2px solid var(--pearl); outline-offset: 2px; }
+
+.chart-days {
+  display: flex;
+  gap: 4px;                 /* same gap as the bars, so numbers line up */
+  margin-top: 6px;
+}
+.chart-days span {
+  flex: 1;
+  max-width: 40px;          /* same width rule as the bars */
+  text-align: center;
+  font-size: 11px;
+  color: var(--smoke);
+  font-variant-numeric: tabular-nums;
 }
 
-.chart-axis {
-  display: flex;
-  justify-content: space-between;
-  color: var(--smoke);
+.chart-hint {
+  margin: 10px 0 0;
   font-size: 12px;
-  margin-top: 6px;
+  color: var(--smoke);
 }
 
 .stat-list { display: grid; gap: 8px; }

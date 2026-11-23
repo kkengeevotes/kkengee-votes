@@ -159,32 +159,50 @@ function dailyPoints(days) {
   return points.slice(-14);
 }
 
-// The bar chart's HTML, e.g. chartHtml("Air", "daily streams", points)
+// The bar chart's HTML. Each bar is a button: tap it to see that day.
 function chartHtml(title, unit, points) {
   const fmt = (n) => n.toLocaleString("en-US");
   const max = Math.max(...points.map((p) => p.gain), 1);
-  const latest = points[points.length - 1];
+  const last = points.length - 1;
+  const latest = points[last];
+
   const bars = points
     .map((p, i) => {
       const height = Math.max(2, (Math.max(0, p.gain) / max) * 100);
-      const isLatest = i === points.length - 1 ? " latest" : "";
-      return `<div class="chart-bar${isLatest}" style="height:${height}%"
-                   title="${shortDate(p.date)}: +${fmt(p.gain)}"></div>`;
+      const selected = i === last; // the newest day starts selected
+      return `<button type="button" class="chart-bar${selected ? " selected" : ""}"
+                style="height:${height}%"
+                data-gain="${fmt(p.gain)}" data-date="${shortDate(p.date)}"
+                aria-pressed="${selected}"
+                aria-label="${shortDate(p.date)}: +${fmt(p.gain)} ${unit}"></button>`;
     })
+    .join("");
+
+  // Day numbers under the bars: "2026-11-07" → "7"
+  const days = points
+    .map((p) => `<span>${Number(p.date.slice(8, 10))}</span>`)
     .join("");
 
   return `
     <p class="chart-label">${escapeHtml(title)} · ${unit}</p>
-    <p class="chart-latest"><strong>+${fmt(latest.gain)}</strong> on ${shortDate(latest.date)}</p>
-    <div class="chart-bars" role="img"
-         aria-label="${escapeHtml(title)} ${unit}, latest +${fmt(latest.gain)} on ${shortDate(latest.date)}">
-      ${bars}
-    </div>
-    <div class="chart-axis">
-      <span>${shortDate(points[0].date)}</span>
-      <span>${shortDate(latest.date)}</span>
-    </div>`;
+    <p class="chart-latest" aria-live="polite"><strong>+${fmt(latest.gain)}</strong> on ${shortDate(latest.date)}</p>
+    <div class="chart-bars" role="group" aria-label="${escapeHtml(title)} ${unit} by day">${bars}</div>
+    <div class="chart-days" aria-hidden="true">${days}</div>
+    <p class="chart-hint">Tap a bar to see that day</p>`;
 }
+
+// One listener for every chart on the page: tapping a bar shows its day
+document.addEventListener("click", (event) => {
+  const bar = event.target.closest(".chart-bar");
+  if (!bar) return;
+  const card = bar.closest(".chart-card");
+  card.querySelectorAll(".chart-bar").forEach((b) => {
+    b.classList.toggle("selected", b === bar);
+    b.setAttribute("aria-pressed", b === bar);
+  });
+  card.querySelector(".chart-latest").innerHTML =
+    `<strong>+${bar.dataset.gain}</strong> on ${bar.dataset.date}`;
+});
 
 // Stationhead button: shows the element with id="stationhead-btn"
 // if Settings has a valid stationhead_url
